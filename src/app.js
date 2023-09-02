@@ -5,7 +5,6 @@ import { Server } from "socket.io";
 import router from "./routes/routes.js";
 import __dirname from './utils.js';
 import productos from './data/productos.js';
-// import { io } from "socket.io-client";
 
 const app = express();
 
@@ -19,6 +18,7 @@ app.set('view engine', 'handlebars');
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/socket.io', express.static(path.join(__dirname, 'node_modules/socket.io-client/dist')));
+
 
 
 // Rutas
@@ -47,13 +47,19 @@ io.on('connection', socket => {
     console.log('Cliente conectado al socket');
 
     // Manejar eventos de agregar o eliminar productos
-    socket.on('addProduct', (newProduct) => {
+    socket.on('addProduct', (newProductName) => {
       // Lógica para agregar el producto a la lista de productos
-      io.emit('updateProducts', newProduct);
+      const newProduct = { id: productos.length + 1, name: newProductName };
+      productos.push(newProduct);
+      io.emit('updateProducts', productos);
     });
   
     socket.on('removeProduct', (productId) => {
       // Lógica para eliminar el producto de la lista de productos
-      io.emit('updateProducts', productId);
+      const productIndex = productos.findIndex(product => product.id === productId);
+      if (productIndex !== -1) {
+        productos.splice(productIndex, 1);
+        io.emit('updateProducts', productos);
+      }
     });
 });
