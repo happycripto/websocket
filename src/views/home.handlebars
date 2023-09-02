@@ -1,11 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Script para manejar WebSocket y funciones -->
-<script src="/socket.io/socket.io.js"></script> <!-- Cargar socket.io-client -->
-<script type="module" src="/js/index.js"></script> <!-- Cargar tu archivo JavaScript -->
-<script type="module" src="/js/cliente.js"></script>
-<script src="/bundle.js"></script>
+    
 <link rel="shortcut icon" href="#" />
 
 
@@ -18,6 +14,11 @@
             <li>Nombre: {{this.name}}, Precio: {{this.price}}, Stock: {{this.stock}}</li>
         {{/each}}
     </ul>
-  
+    
+<!-- Script para manejar WebSocket y funciones -->
+<script src="/socket.io/socket.io.js"></script> <!-- Cargar socket.io-client -->
+<script type="module" src="/js/index.js"></script> <!-- Cargar tu archivo JavaScript -->
+<script type="module" src="/js/cliente.js"></script>
+<script src="/bundle.js"></script>
 </body>
 </html>

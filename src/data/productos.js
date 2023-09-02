@@ -7,4 +7,5 @@ const productos = [
   ];
   
   export default productos;
+  console.log(productos)
   

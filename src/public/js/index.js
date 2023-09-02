@@ -1,6 +1,4 @@
-
 const socket = io();
-
 
 document.addEventListener('DOMContentLoaded', () => {
   const productList = document.getElementById('product-list');
@@ -15,6 +13,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Actualizar la lista de productos en la vista
     productList.innerHTML = html;
+
+    // Agregamos un data-product-id al botón de eliminar para identificar el producto
+  const removeButtons = productList.querySelectorAll('.remove-product-button');
+  removeButtons.forEach((button) => {
+    button.addEventListener('click', removeProduct);
+  });
   });
 
   // Función para enviar el nuevo producto al servidor
@@ -25,7 +29,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Función para eliminar un producto del servidor
-  function removeProduct(productId) {
+  function removeProduct(event) {
+    const productId = event.target.getAttribute('data-product-id');
+    console.log('Eliminando producto con ID:', productId);
     socket.emit('removeProduct', productId);
   }
 
@@ -33,12 +39,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   productList.addEventListener('click', (event) => {
     if (event.target.classList.contains('remove-product-button')) {
-      const productId = event.target.getAttribute('data-product-id');
-      removeProduct(productId);
+      console.log('Botón Eliminar clickeado.');
+      removeProduct(event);
     }
   });
 });
+
 export default socket;
+
+
 
 
 
