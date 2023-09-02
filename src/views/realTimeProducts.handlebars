@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Real Time Products</title>
+  <link rel="shortcut icon" href="#" />
 </head>
 <body>
   <h1>Real Time Products</h1>
@@ -11,12 +12,18 @@
   <!-- Formulario para agregar productos -->
   <form id="product-form">
     <input type="text" id="product-name" placeholder="Nombre del producto">
-    <button type="submit">Agregar Producto</button>
+    <button type="button" id="add-product-button">Agregar Producto</button>
   </form>
   
   <!-- Lista de productos -->
   <ul id="product-list">
     <!-- Aquí se generará la lista de productos usando Handlebars -->
+    {{#each products}}
+      <li>
+        {{this.name}} 
+        <button class="remove-product-button" data-product-id="{{this.id}}">Eliminar</button>
+      </li>
+    {{/each}}
   </ul>
   
   <!-- Plantilla Handlebars para la lista de productos -->
@@ -24,16 +31,16 @@
     {{#each products}}
       <li>
         {{this.name}} 
-        <button onclick="removeProduct('{{this.id}}')">Eliminar</button>
+        <button class="remove-product-button" data-product-id="{{this.id}}">Eliminar</button>
       </li>
     {{/each}}
   </script>
-  
+
   <!-- Cargar socket.io-client y tu archivo JavaScript -->
   <script src="/socket.io/socket.io.js"></script>
   <script type="module" src="/js/index.js"></script>
+  <script type="module" src="/js/cliente.js"></script>
   <script src="/bundle.js"></script>
-
 </body>
 </html>
 

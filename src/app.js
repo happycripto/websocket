@@ -21,6 +21,7 @@ app.use('/socket.io', express.static(path.join(__dirname, 'node_modules/socket.i
 
 
 
+
 // Rutas
 app.use('/', router);
 
