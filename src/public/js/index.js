@@ -23,9 +23,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Función para enviar el nuevo producto al servidor
   function addProduct() {
-    const productName = document.getElementById('product-name').value;
-    socket.emit('addProduct', productName);
+    const productName = document.getElementById('product-name',).value;
+    const productPrice = parseFloat(document.getElementById('product-price').value);
+    const productStock = parseInt(document.getElementById('product-stock').value);
+  
+
+    // Crear un objeto que represente el producto
+    const newProduct = {
+      name: productName,
+      price: productPrice, 
+      stock: productStock 
+    };
+
+    socket.emit('addProduct', newProduct);
     console.log('ENVIADO: Nuevo producto al servidor:', productName);
+
   }
 
   // Función para eliminar un producto del servidor
